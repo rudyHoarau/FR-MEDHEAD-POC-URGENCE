@@ -1,9 +1,9 @@
 package fr.medhead.hospital.model;
 
-import fr.medhead.hospital.repertoire.HopitalRepository;
 import lombok.*;
 
 import javax.persistence.*;
+import java.awt.*;
 import java.util.List;
 
 @Entity
@@ -15,6 +15,8 @@ public class Hopital {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String nomHopital;
+    private int gpsX; // coordonné GPS de l'hopital
+    private int gpsY; // coordonné GPS de l'hopital
     private int litsDisponibles;
 
     @ManyToMany()
@@ -25,8 +27,10 @@ public class Hopital {
 
     public Hopital() {}
 
-    public Hopital(String nomHopital, int litsDisponibles, List<Specialite> specialites) {
+    public Hopital(String nomHopital, int gpsX, int gpsY, int litsDisponibles, List<Specialite> specialites) {
         this.nomHopital = nomHopital;
+        this.gpsX = gpsX;
+        this.gpsY = gpsY;
         this.litsDisponibles = litsDisponibles;
         this.specialites = specialites;
     }

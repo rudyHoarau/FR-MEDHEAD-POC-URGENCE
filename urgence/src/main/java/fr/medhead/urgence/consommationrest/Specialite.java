@@ -15,4 +15,9 @@ public class Specialite {
     private String nom;
 
     public Specialite() {/*CONSTRUCTEUR*/}
+
+    public Specialite(String groupe, String nom) {
+        this.groupe = groupe;
+        this.nom = nom;
+    }
 }

@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 
 @Component
-@RestController
 public class ConsumingHopitalRest {
 
     @Autowired
@@ -23,14 +22,13 @@ public class ConsumingHopitalRest {
         this.restTemplate = new RestTemplate();
     }
 
-    public Hopital trouverUnHopitalProcheParSpecialite(String specialiteSouhaite){
+    public Hopital trouverUnHopitalProcheParSpecialite(String specialiteSouhaite, int origineX, int origineY){
 
-        String url = "http://localhost:8081/hopitaux/%1";
+        String url = "http://localhost:8081/hopitaux/%1/%2/%3";
 
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//        HttpEntity <String> entity = new HttpEntity<String>(headers);
-        url = url.replace("%1",specialiteSouhaite);
+        url = url.replace("%1",specialiteSouhaite)
+                .replace("%2", String.valueOf(origineX))
+                .replace("%3",String.valueOf(origineY));
         return restTemplate
                 .getForObject(url, Hopital.class);
     }

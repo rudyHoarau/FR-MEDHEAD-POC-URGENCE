@@ -1,4 +1,4 @@
-package fr.medhead.hospital.repertoire;
+package fr.medhead.hospital.service.repertoire;
 
 import fr.medhead.hospital.model.Hopital;
 import org.springframework.data.jpa.repository.JpaRepository;

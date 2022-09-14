@@ -4,23 +4,20 @@ import fr.medhead.urgence.consommationrest.ConsumingHopitalRest;
 import fr.medhead.urgence.consommationrest.Hopital;
 import fr.medhead.urgence.model.Urgence;
 import fr.medhead.urgence.repertoire.UrgenceRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
+@RequiredArgsConstructor
 public class UrgenceServiceImpl implements UrgenceService {
 
     @Autowired
-    private final UrgenceRepository urgenceRepository;
+    private UrgenceRepository urgenceRepository;
     @Autowired
-    private final ConsumingHopitalRest hopitalRest;
-
-    public UrgenceServiceImpl(UrgenceRepository urgenceRepository, ConsumingHopitalRest hopitalRest) {
-        this.urgenceRepository = urgenceRepository;
-        this.hopitalRest = hopitalRest;
-    }
+    private ConsumingHopitalRest hopitalRest;
 
     @Override
     public Collection<Urgence> tous() {
@@ -29,9 +26,10 @@ public class UrgenceServiceImpl implements UrgenceService {
 
     @Override
     public Urgence nouvelleUrgence(Urgence nouvelleUrgence) {
-
-
-        Hopital hopitalDestination = this.hopitalRest.trouverUnHopitalProcheParSpecialite(nouvelleUrgence.getSpecialiteSouhaite());
+        Hopital hopitalDestination = this.hopitalRest
+                .trouverUnHopitalProcheParSpecialite(nouvelleUrgence.getSpecialiteSouhaite()
+                        , nouvelleUrgence.getGpsOrigineX()
+                        , nouvelleUrgence.getGpsOrigineY());
         nouvelleUrgence.setHopitalDestinationId(hopitalDestination.getId());
         nouvelleUrgence.setNomHopitalDestination(hopitalDestination.getNomHopital());
 

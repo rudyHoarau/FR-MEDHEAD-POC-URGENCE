@@ -2,13 +2,15 @@ package fr.medhead.hospital.service;
 
 import fr.medhead.hospital.exceptions.SpecialiteNotFoundException;
 import fr.medhead.hospital.model.Hopital;
-import fr.medhead.hospital.model.Specialite;
-import fr.medhead.hospital.repertoire.HopitalRepository;
-import fr.medhead.hospital.repertoire.SpecialiteRepository;
+import fr.medhead.hospital.service.repertoire.HopitalRepository;
+import fr.medhead.hospital.service.repertoire.SpecialiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 @Service
 public class HopitalServiceImpl implements HopitalService{
@@ -29,19 +31,23 @@ public class HopitalServiceImpl implements HopitalService{
     }
 
     @Override
-    public Hopital trouverUnHopitalProcheParSpecialite(String specialiteSouhaite) throws SpecialiteNotFoundException {
+    public Hopital trouverUnHopitalProcheParSpecialite(String specialiteSouhaite, int origineX, int origineY) throws SpecialiteNotFoundException {
         // Collecter les hopitaux destinations qui possède la spécialité souhaité
         Hopital hRetour;
+        Point pointO = new Point(origineX, origineY);
 
         try {
+            // spécialité souhaité
+            // lits disponibles
             hRetour = hopitalRepository.findAll()
                     .stream()
                     .filter(h -> h.getSpecialites()
                             .contains(specialiteRepository.findByNom(specialiteSouhaite))) // spécialité souhaité
-                    .filter(h -> h.getLitsDisponibles()>0) // lits disponibles
-                    .findFirst()
+                    .filter(h -> h.getLitsDisponibles() > 0)
+                    .min(Comparator.comparingInt(value ->
+                            (int) Point.distance(origineX,origineX,value.getGpsX(), value.getGpsY())))
                     .get();
-        } catch (java.util.NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw new SpecialiteNotFoundException(specialiteSouhaite);
         }
 

@@ -6,5 +6,5 @@ import java.util.Collection;
 
 public interface HopitalService {
     Collection<Hopital> tous();
-    Object trouverUnHopitalProcheParSpecialite(String specialiteSouhaite);
+    Object trouverUnHopitalProcheParSpecialite(String specialiteSouhaite, int origineX, int origineY);
 }

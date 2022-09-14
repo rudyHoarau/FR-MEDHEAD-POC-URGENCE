@@ -18,7 +18,8 @@ public class Urgence {
     private long id;
     private long patientId;
     private String specialiteSouhaite;
-    private String adresseOrigine;
+    private int gpsOrigineX;
+    private int gpsOrigineY;
     private long hopitalDestinationId;
     private String nomHopitalDestination;
     private long reservationId;
@@ -26,14 +27,24 @@ public class Urgence {
     public Urgence() {
     }
 
-    public Urgence(long patientId, String adresseOrigine) {
+    public Urgence(long patientId, String specialiteSouhaite,int origineX, int origineY) {
         this.patientId = patientId;
-        this.adresseOrigine = adresseOrigine;
+        this.specialiteSouhaite = specialiteSouhaite;
+        this.gpsOrigineX = origineX;
+        this.gpsOrigineY = origineY;
     }
 
-    public Urgence(long patientId, String adresseOrigine, long hopitalDestinationId, String nomHopitalDestination, long reservationId) {
+    public Urgence(long patientId
+            , String specialiteSouhaite
+            , int gpsOrigineX
+            , int gpsOrigineY
+            , long hopitalDestinationId
+            , String nomHopitalDestination
+            , long reservationId) {
         this.patientId = patientId;
-        this.adresseOrigine = adresseOrigine;
+        this.specialiteSouhaite = specialiteSouhaite;
+        this.gpsOrigineX = gpsOrigineX;
+        this.gpsOrigineY = gpsOrigineY;
         this.hopitalDestinationId = hopitalDestinationId;
         this.nomHopitalDestination = nomHopitalDestination;
         this.reservationId = reservationId;

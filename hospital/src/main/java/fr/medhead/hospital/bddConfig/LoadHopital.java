@@ -2,8 +2,8 @@ package fr.medhead.hospital.bddConfig;
 
 import fr.medhead.hospital.model.Hopital;
 import fr.medhead.hospital.model.Specialite;
-import fr.medhead.hospital.repertoire.HopitalRepository;
-import fr.medhead.hospital.repertoire.SpecialiteRepository;
+import fr.medhead.hospital.service.repertoire.HopitalRepository;
+import fr.medhead.hospital.service.repertoire.SpecialiteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -37,9 +37,9 @@ public class LoadHopital {
             hBB.add(specialite.findByNom("immunologie"));
             hBB.add(specialite.findByNom("neuropathologie diagnostique"));
 
-            log.info("Preloading 2 " + hopital.save(new Hopital("Hopital Fred Brooks", 2, hFB)));
-            log.info("Preloading 2 " + hopital.save(new Hopital("Hopital Julia Crusher", 0, hJC)));
-            log.info("Preloading 2 " + hopital.save(new Hopital("Hopital Beverly Bashir", 5, hBB)));
+            log.info("Preloading 2 " + hopital.save(new Hopital("Hopital Fred Brooks",1,1,2, hFB)));
+            log.info("Preloading 2 " + hopital.save(new Hopital("Hopital Julia Crusher",2,2, 0, hJC)));
+            log.info("Preloading 2 " + hopital.save(new Hopital("Hopital Beverly Bashir",4,6, 5, hBB)));
         };
     }
 }

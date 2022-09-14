@@ -26,8 +26,8 @@ public class HopitalRestController {
         return this.hopitalServiceImpl.tous();
     }
 
-    @GetMapping("/hopitaux/{specialiteSouhaite}")
-    Hopital trouverUnHopitalProcheParSpecialite(@PathVariable String specialiteSouhaite) {
-        return (Hopital) hopitalServiceImpl.trouverUnHopitalProcheParSpecialite(specialiteSouhaite);
+    @GetMapping("/hopitaux/{specialiteSouhaite}/{origineX}/{origineY}")
+    Hopital trouverUnHopitalProcheParSpecialite(@PathVariable String specialiteSouhaite, @PathVariable int origineX, @PathVariable int origineY) {
+        return (Hopital) hopitalServiceImpl.trouverUnHopitalProcheParSpecialite(specialiteSouhaite, origineX, origineY);
     }
 }
