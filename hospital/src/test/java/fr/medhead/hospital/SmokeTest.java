@@ -15,7 +15,7 @@ public class SmokeTest {
     private HopitalRestController controller;
 
     @Test
-    void contextLoads() throws Exception {
+    void contextLoads() {
         assertThat(controller).isNotNull();
     }
 }
