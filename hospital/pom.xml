@@ -15,7 +15,6 @@
     <description>hospital</description>
     <properties>
         <java.version>18</java.version>
-        <linkXRef>false</linkXRef>
     </properties>
     <dependencies>
         <dependency>
@@ -60,5 +59,16 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
