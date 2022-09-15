@@ -15,6 +15,7 @@
     <description>hospital</description>
     <properties>
         <java.version>18</java.version>
+        <linkXRef>false</linkXRef>
     </properties>
     <dependencies>
         <dependency>
@@ -60,5 +61,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
