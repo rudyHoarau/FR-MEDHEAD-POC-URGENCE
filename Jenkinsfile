@@ -16,10 +16,10 @@ node {
         withEnv(["MVN_HOME=$mvnHome"]) {
             if (isUnix()) {
 				sh '''cd hospital
-                    $MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean compile\''''
+                    $MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean install\''''
             } else {
 				bat '''cd hospital
-				    "%MVN_HOME%\\bin\\mvn" -Dmaven.test.failure.ignore clean compile'''
+				    "%MVN_HOME%\\bin\\mvn" -Dmaven.test.failure.ignore clean install'''
             }
         }
     }
@@ -28,10 +28,10 @@ node {
         withEnv(["MVN_HOME=$mvnHome"]) {
             if (isUnix()) {
 				sh '''cd urgence
-                    $MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean compile\''''
+                    $MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean install\''''
             } else {
 				bat '''cd urgence
-				    "%MVN_HOME%\\bin\\mvn" -Dmaven.test.failure.ignore clean compile'''
+				    "%MVN_HOME%\\bin\\mvn" -Dmaven.test.failure.ignore clean install'''
             }
         }
     }
