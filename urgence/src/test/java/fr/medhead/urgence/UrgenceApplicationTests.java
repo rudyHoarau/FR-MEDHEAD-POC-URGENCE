@@ -47,11 +47,6 @@ class UrgenceApplicationTests {
     //    @SneakyThrows
     @BeforeEach
     void setup() {
-        //        mockServer = MockRestServiceServer.createServer(hopitalRest);
-
-//        webTestClient = WebTestClient
-//                .bindToController(new UrgenceRestController(urgenceService))
-//                .build();
 
         List<Specialite> specialiteList = new ArrayList<>();
         specialiteList.add(new Specialite("medecine generale","cardiologie"));
