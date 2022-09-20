@@ -19,6 +19,6 @@ Les modules sont instancié à l'aide de JAVA Spring.
 * **Hopital** : Module connexe à l'urgence permettant de fournir des l'hopital plus proche celon pathologie et les coordonnées d'origine (de l'urgence). 
 ## 2.2. Jenkinsfile
 Permet la construction d'un pipeline CI/CD afin d'exécuter le build et les tests des modules Urgence et Hopital.
-> Ce référer au fichier de la racine de ce répertoire pour réaliser la mise en place du pipeline Jenkins : XXX.md
+> Ce référer au fichier de la racine de ce répertoire pour réaliser la mise en place du pipeline Jenkins : [CONFIGURATION_CICD.md](https://github.com/rudyHoarau/FR-MEDHEAD-POC-URGENCE/blob/58c51ea1a094dd05a4efec89181f3b66b6d9d704/CONFIGURATION_CICD.md)
 ## 2.3. Postmanfile
 Fichier à importer dans [Postman](https://www.postman.com/downloads/) pour réaliser les tests E2E. 
