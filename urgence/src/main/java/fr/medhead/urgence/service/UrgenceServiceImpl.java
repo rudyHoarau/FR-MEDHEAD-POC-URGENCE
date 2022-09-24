@@ -4,20 +4,29 @@ import fr.medhead.urgence.consommationrest.ConsumingHopitalRest;
 import fr.medhead.urgence.consommationrest.Hopital;
 import fr.medhead.urgence.model.Urgence;
 import fr.medhead.urgence.repertoire.UrgenceRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
-@RequiredArgsConstructor
+@Slf4j
 public class UrgenceServiceImpl implements UrgenceService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(UrgenceServiceImpl.class);
+
     @Autowired
-    private UrgenceRepository urgenceRepository;
+    private final UrgenceRepository urgenceRepository;
     @Autowired
-    private ConsumingHopitalRest hopitalRest;
+    private final ConsumingHopitalRest hopitalRest;
+
+    public UrgenceServiceImpl(UrgenceRepository urgenceRepository, ConsumingHopitalRest hopitalRest) {
+        this.urgenceRepository = urgenceRepository;
+        this.hopitalRest = hopitalRest;
+    }
 
     @Override
     public Collection<Urgence> tous() {
@@ -26,17 +35,26 @@ public class UrgenceServiceImpl implements UrgenceService {
 
     @Override
     public Urgence nouvelleUrgence(Urgence nouvelleUrgence) {
+
+        Urgence urgenceComplete = nouvelleUrgence;
+        System.out.println("urgence new -> " + nouvelleUrgence);
         Hopital hopitalDestination = this.hopitalRest
                 .trouverUnHopitalProcheParSpecialite(nouvelleUrgence.getSpecialiteSouhaite()
                         , nouvelleUrgence.getGpsOrigineX()
                         , nouvelleUrgence.getGpsOrigineY());
-        nouvelleUrgence.setHopitalDestinationId(hopitalDestination.getId());
-        nouvelleUrgence.setNomHopitalDestination(hopitalDestination.getNomHopital());
 
+        LOG.debug("retour du service hopital --> " + hopitalDestination.toString());
+
+        urgenceComplete.setHopitalDestinationId(hopitalDestination.getId());
+        urgenceComplete.setNomHopitalDestination(hopitalDestination.getNomHopital());
         // 2- reserver un lit pour le patient à transférer
-        nouvelleUrgence.setReservationId(0);
+        urgenceComplete.setReservationId(0);
+
+        LOG.debug("retour urgence complété --> " + hopitalDestination.toString());
+
+        System.out.println("urgence complété -> " + urgenceComplete);
 
         // 3 - sauvegarder l'urgence
-        return this.urgenceRepository.save(nouvelleUrgence);
+        return this.urgenceRepository.save(urgenceComplete);
     }
 }
